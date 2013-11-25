@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<head>
+<title>GO FLIGHT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.1.css" />
+<link rel="stylesheet" type="text/css" href="css/loading.css" />
+<link rel="stylesheet" type="text/css" href="js/datebox/latest/jqm-datebox.min.css" /> 
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+<script type="text/javascript" src="js/jquery.mobile.min.js"></script>
+<script type="text/javascript" src="js/gf.js"></script>
+<script type="text/javascript" src="js/datebox/latest/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="js/datebox/latest/jqm-datebox.core.min.js"></script>
+<script type="text/javascript" src="js/datebox/latest/jqm-datebox.mode.calbox.min.js"></script>
+<script type="text/javascript" src="js/datebox/latest/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
+
+</head>
+<body>
+
+<div data-role=page id=home style="background:url('css/images/gf_logo.gif') #0093ea no-repeat;background-position:center;">      
+</div>
+  
+  
+<div data-role=page id=srcflight search="false" filter="false" back="false" fl="1" inf="1" tab="oneway">
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" style='background:#000;'>
+            <h1>Go Flight</h1>				
+			<div data-role="navbar">
+				<ul>
+				<li><a href="#srcflight" id="radio-one" data-icon="forward" data-transition="slide"  data-theme="a" class="ui-btn-active">One Way</a></li>
+				<li><a href="#srcflight" id="radio-return" data-icon="refresh" data-transition="slide"  data-theme="a">Return Trip</a></li>
+				</ul>
+			</div>	
+		</div>  
+		
+       <div data-role=content>
+	   
+			<h4>	
+			
+            <p>Depart</p>
+			<p>
+            <select class="bandara" name="select-city-origin" id="origin">
+            </select>
+			</p>
+			
+			<p>Arrive</p>
+			<p>
+            <select class="bandara" name="select-city-destination" id="to">
+            </select>
+			</p>
+			
+ 			<p>Depart Date</p>
+			<p>
+			<input type ="date"  name="tanggal"  id="tgl" data-role="datebox" data-options='{"mode": "calbox", "afterToday": true, "maxDays": 330}'>
+			</p>
+			
+			<div  id="rd">
+			<p>Return Date</p>
+			<p>
+            <input type ="date" name="tanggal" id="tglkembali" data-role="datebox" data-options='{"mode": "calbox", "maxDays": 330}'>
+			</p>
+            </div>
+			
+			<p>Adult (12+)</p>
+			<p>
+			<select id="adult" name="adult">
+		        <option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+		    </select>
+            </p>
+			
+            <p>Child (2-12)</p>
+			<p>
+            <select id="child" name="child">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+            </select>
+            </p>
+			
+			<p>Infant (<2)</p>
+			<p>
+            <select id="inf" name="inf">
+				<option value="0">0</option>
+				<option value="1">1</option>
+            </select>
+            </p>
+			
+			</h4>
+			
+			<br />
+						
+            <p>
+            <a href="#" data-role="button" class="tampiltiket"  data-theme="d" data-icon="search" data-transition="slide" style="background:#0093ea;color:#fff;" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-html="<span class='ui-bar '><center><img src='css/images/load.gif' /><h2>One moment please</h2></center></span>">Search Flights</a>
+			</p>
+		  
+       </div>
+</div>
+      
+     
+<div data-role=page id=show-ticket-depart>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" style='background:#000;'>
+            <a href="#srcflight" data-icon="arrow-l" class="back" data-transition="slide" data-theme="a">Back</a>
+			<h1>Go Flight</h1>
+			<a href="#srcflight" data-icon="home" class="back" data-transition="slide" id="dep_reset" data-theme="a" onclick="$('#srcflight').attr('search','true');">New</a>
+				
+				<div data-role="navbar" class="nav-showticket">
+					<ul>
+					<li>
+					<a href="#show-ticket-depart"  id="fl_depart" data-transition="slide">Depart Flight</a>
+					</li>
+					<li>
+					<a href="#show-ticket-return"  id="fl_return"  data-transition="slide" >Return Flight</a>
+					</li>
+					</ul>
+				</div>	
+        </div> 
+		
+        <div data-role=content>
+			  
+			<h3><center>Depart Flight Selection</center></h3>
+			<div id="search_dep"></div>
+				 
+			<center>
+			<div  id="ctrl">
+			<select name="select-filter" data-mini="true" class="fildep" data-theme="a">
+			<option value="priceasc">Lowest Price</option>
+			<option value="departureasc">Departure Time</option>
+			</select>
+			</div>
+			</center>
+				
+			<ul data-role="listview" data-inset="true" id="hasil">
+			</ul>
+
+		</div>
+</div>
+
+
+<div data-role=page id=show-ticket-return>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" style="background:#000;">
+            <h1>Go Flight</h1>
+			<a href="#srcflight" data-icon="home" class="ui-btn-right" data-transition="slide" id="arr_reset" data-theme="a" onclick="$('#srcflight').attr('search','true');">New</a>
+				
+				<div data-role="navbar" class="nav-showticket">
+				<ul>
+					<li>
+					<a href="#show-ticket-depart"  id="fl_depart"  data-transition="slide" onclick='$(".filret").selectmenu("refresh");'>Depart Flight</a>
+					</li>
+					<li>
+					<a href="#show-ticket-return"  id="fl_return"  data-transition="slide">Return Flight</a>
+					</li>
+			    </ul>
+				</div>	
+        </div> 
+		
+        <div data-role=content>
+ 
+			<h3><center>Return Flight Selection</center></h3>
+			<div id="search_arr"></div>
+				
+			<center>	
+			<div  id="alt">				
+			<select name="select-filter"data-mini="true" class="filret" data-theme="a">
+			<option value="priceasc" >Lowest Price</option>
+			<option value="departureasc" >Departure Time</option>
+			</select>
+			</div>
+			</center>
+				
+			<ul data-role="listview" data-inset="true" id="kembali">
+			</ul>
+
+		</div>
+</div>
+
+
+<div data-role="page" data-url="dialog.html">
+    <div data-role="header">
+        <h1>Ticket Detail</h1>
+    </div>
+    <div data-role="content" style="background:#fff;">
+        
+		<div  id="ket">
+		</div>
+			
+		<div id="detaillist">
+		</div>
+		<a class='bookingticket' href='' data-role='button' data-mini='true' target='_blank' style='background:#0093ea;color:#fff;'>Book Flight</a>
+		<br />
+		
+		<div class="twit">
+		</div>
+    </div>
+</div>
+
+
+</body>
+<div class="ui-loader-background"> </div>
+</html>
